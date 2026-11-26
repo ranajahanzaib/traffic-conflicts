@@ -1,46 +1,34 @@
-## Contributing
+# Contributing
 
-We welcome contributions of all kinds to improve this project! Here's how you can get involved:
+Contributions that improve the scientific methods, data provenance, accessibility, reliability, or documentation are welcome. For substantial changes, open an issue first to discuss scope and design.
 
-1. **Fork the Repository**: Start by forking the repository to your GitHub account.
+## Development setup
 
-2. **Clone Your Fork**: Clone the forked repository to your local machine:
+Install Go 1.27 or later, Python 3.10 or later, Node.js 22 or later, and pnpm 12. Clone the repository and enter its directory. The Python pipeline uses only the standard library; Go and pnpm resolve their dependencies from the committed module and package lockfiles.
 
-   ```bash
-   git clone <repo_url>
-   cd repo_dir
-   ```
+```sh
+git clone https://github.com/ranajahanzaib/traffic-conflicts.git
+cd traffic-conflicts
+pnpm --dir apps/web install --frozen-lockfile
+make dev
+```
 
-3. **Create a Branch**: Create a new branch for your feature or bug fix:
+Run the local checks before submitting a change:
 
-   ```bash
-   git checkout -b feature-name
-   ```
+```sh
+make test
+make build
+make validate
+make frontend-lint
+```
 
-4. **Make Changes**: Make your changes to the codebase. Be sure to follow existing code style and conventions.
+## Contribution guidelines
 
-5. **Commit Changes**: Commit your changes with a clear and descriptive message:
+- Add or update tests for behavior changes.
+- Preserve source annotations and provenance; keep unknown values unknown.
+- Keep synthetic fixtures labeled and out of research aggregates.
+- Do not commit raw datasets, credentials, private keys, or generated local indexes.
+- Before adding or redistributing data, review its source-specific license, attribution, map terms, and derived-data permissions. The InterHub code license does not grant rights to its underlying source datasets.
+- Update user-facing documentation when commands, configuration, API behavior, or scientific assumptions change.
 
-   ```bash
-   git commit -m "Add detailed description of the changes"
-   ```
-
-6. **Push Changes**: Push your changes to your fork:
-
-   ```bash
-   git push origin feature-name
-   ```
-
-7. **Submit a Pull Request**: Open a pull request from your branch to the main repository's branch. Include a detailed description of your changes and the problem they solve.
-
-8. **Review and Feedback**: Participate in the review process. Make any requested changes, and your contribution will be merged!
-
-### Guidelines
-
-- Ensure your code follows the existing style and conventions.
-- Include tests for any new functionality or bug fixes.
-- Write clear, concise commit messages and pull request descriptions.
-
-### Issues
-
-Feel free to report bugs or suggest enhancements by creating an issue. Be sure to include detailed information about the problem and, if possible, steps to reproduce it.
+Pull requests should explain the user-visible or scientific impact, note any compatibility changes, and report the checks that were run. Use the issue and pull request templates to provide reproducible details.
