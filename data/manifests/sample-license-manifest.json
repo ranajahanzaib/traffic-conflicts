@@ -1,0 +1,12 @@
+{
+  "dataset": "interaction_multi",
+  "review_status": "reviewed",
+  "dataset_license": "Academic Research Use (Non-Commercial)",
+  "attribution": "INTERACTION Dataset Consortium (UC Berkeley, Tsinghua, KIT)",
+  "redistribution_allowed": false,
+  "map_redistribution_allowed": false,
+  "derived_data_allowed": true,
+  "commercial_use_allowed": false,
+  "evidence_url": "https://interaction-dataset.com/",
+  "reviewed_at": "2026-11-26"
+}

@@ -1,0 +1,7 @@
+dataset,folder,scenario_idx,track_id,start,end,intensity,PET,two/multi,vehicle_type,AV_included,key_agents,path_category,path_relation,turn_label,priority_label,original_data_file,original_scene_id,original_track_id
+interaction_multi,cache/release,101,agent_1;agent_2;agent_3,1.20,6.50,3.15,0.52,multi,"['HV', 'AV']",AV,agent_1;agent_2,CP,C-O,L-S,agent_2,scene_101.csv,DR_USA_Intersection_GL,11;12;13
+interaction_multi,cache/release,102,agent_4;agent_5,2.00,7.10,2.40,0.73,two,"['HV', 'HV']",none,agent_4;agent_5,CP,C-O,S-L,agent_4,scene_102.csv,DR_USA_Intersection_EP,21;22
+interaction_multi,cache/release,103,agent_6;agent_7;agent_8,0.50,5.80,1.85,1.15,multi,"['AV', 'HV']",AV,agent_6;agent_7,MP,M-O,S-S,agent_7,scene_103.csv,DR_USA_Roundabout_FT,31;32;33
+interaction_multi,cache/release,104,agent_9;agent_10,3.10,8.20,1.60,1.48,two,"['HV', 'HV']",none,agent_9;agent_10,FP,F-O,S-S,agent_10,scene_104.csv,DR_CHN_Merging_ZS,41;42
+interaction_multi,cache/release,105,agent_11;agent_12;agent_13,1.80,6.90,1.20,1.85,multi,"['HV', 'AV']",AV,agent_11;agent_12,CP,C-O,L-L,agent_11,scene_105.csv,DR_USA_Intersection_MA,51;52;53
+interaction_multi,cache/release,106,agent_14;agent_15,0.80,5.40,0.95,2.40,two,"['HV', 'HV']",none,agent_14;agent_15,MP,M-O,R-S,agent_15,scene_106.csv,DR_DEU_Roundabout_OF,61;62
