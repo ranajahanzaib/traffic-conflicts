@@ -1,0 +1,461 @@
+<!-- Static, reviewed page markup migrated from the original workbench. -->
+<template id="overview-template">
+      <section class="page-heading">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> NATURALISTIC DRIVING RESEARCH</div>
+          <h1>Every interaction<br>tells a <em>story.</em></h1>
+          <p class="lede">An observatory for the moments where vehicle paths converge.<br>Explore the science of
+            near-collisions.</p>
+          <div class="heading-actions"><button class="button-primary" data-view="explore">Explore scenarios
+              <span>→</span></button><button class="button-quiet" data-view="methodology">How measurements work
+              <span>↗</span></button></div>
+        </div>
+        <div class="heading-stamp"><span class="stamp-ring">TCA</span><span>INTERACTION<br>OBSERVATORY</span><span
+            class="mono">LOCAL / 01</span></div>
+      </section>
+      <section class="scene-section">
+        <div class="section-top">
+          <div>
+            <div class="section-kicker">01 — INTERACTION REPLAY</div>
+            <h2>A crossing, in motion</h2>
+          </div>
+          <div class="scene-meta"><span class="fixture-tag"><span class="fixture-dot"></span> SYNTHETIC VALIDATION
+              FIXTURE</span><span class="mono">fixture-crossing-001</span></div>
+        </div>
+        <div class="scene-frame">
+          <div class="scene-toolbar">
+            <div class="mode-switch"><button class="mode active" data-mode="schematic">SCHEMATIC</button><button
+                class="mode" data-mode="engineering">ENGINEERING</button></div>
+            <div class="scene-tools"><button id="grid-toggle" class="tool-button active"
+                title="Toggle measurement grid">⊞ <span>GRID</span></button><button id="reset-camera"
+                class="tool-button" title="Reset view">⤢ <span>RESET</span></button></div>
+          </div>
+          <div id="scene" class="scene-canvas" role="img"
+            aria-label="Animated top-down synthetic crossing scenario. Two vehicles travel on perpendicular paths through a marked conflict zone.">
+          </div>
+          <div class="scene-overlay scene-coordinate mono">LOCAL METRIC FRAME<br>ORIGIN · (0.00, 0.00) m<br>AXIS · X → /
+            Y ↑</div>
+          <div class="scene-overlay scene-legend"><span><i class="legend-agent cyan"></i> VEHICLE A</span><span><i
+                class="legend-agent purple"></i> VEHICLE B</span><span><i class="legend-conflict"></i> CONFLICT
+              REGION</span></div>
+          <div class="scene-footer">
+            <div class="play-controls"><button id="play-toggle" class="play-button" aria-label="Play">▶</button><button
+                id="step-back" class="step-button" aria-label="Previous frame">‹</button><button id="step-forward"
+                class="step-button" aria-label="Next frame">›</button><span class="mono timecode"
+                id="timecode">00:00.0</span></div><input id="timeline" class="timeline" type="range" min="0" max="90"
+              value="30" aria-label="Scenario playback time"><span class="mono duration">00:09.0</span><button
+              id="speed-button" class="speed-button">1×</button>
+          </div>
+        </div>
+        <div class="scene-caption"><span>DETERMINISTIC SYNTHETIC GEOMETRY · 10 SAMPLES PER AGENT</span><span>METRIC
+            COORDINATES · NO MAP DATA</span></div>
+      </section>
+      <section class="insight-strip">
+        <div class="insight-lead"><span class="section-kicker">A NOTE ON THIS VIEW</span>
+          <p>This scene is a known-geometry fixture for checking rendering and occupancy calculations. It is not an
+            observed road event and is excluded from research results.</p>
+        </div>
+        <div class="insight-metric"><span class="metric-label">SOURCE PET</span><strong>—</strong><span>Not
+            available</span></div>
+        <div class="insight-metric"><span class="metric-label">DERIVED PET</span><strong>—</strong><span>Simultaneous
+            zone occupancy</span></div>
+        <div class="insight-metric"><span class="metric-label">INTERACTION INTENSITY</span><strong>—</strong><span>No
+            source measurement</span></div>
+      </section>
+      <section class="lower-grid">
+        <div class="lower-block">
+          <div class="section-kicker">02 — EXPLORE THE DATA</div>
+          <h3>Start with a question.</h3>
+          <p>Filter validated interaction records by source annotation, agents, motion, and measurement quality.</p>
+          <button class="button-quiet" data-view="explore">Open scenario explorer <span>→</span></button>
+        </div>
+        <div class="lower-block">
+          <div class="section-kicker">03 — REPRODUCIBLE METHODS</div>
+          <h3>See how metrics are defined.</h3>
+          <p>Source-provided and independently derived measurements stay distinct, with provenance carried into every
+            view.</p><button class="button-quiet" data-view="methodology">Read the methodology <span>→</span></button>
+        </div>
+      </section>
+    </template>
+
+<template id="explore-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> SCENARIO CATALOG</div>
+          <h1>Explore <em>interactions.</em></h1>
+          <p class="lede">Search and filter imported research records. Synthetic fixtures are shown separately.</p>
+        </div><button class="button-quiet export-button" id="export-query">Export query <span>↗</span></button>
+      </div>
+      <div class="catalog-banner"><span class="status-dot"></span>
+        <div><b>No research release is available locally.</b><span> The scenario index is empty until licensed source
+            data is imported.</span></div>
+      </div>
+      <div class="explorer-layout">
+        <section class="filter-panel">
+          <div class="filter-head"><span>FILTERS</span><button id="clear-filters">CLEAR</button></div><label
+            class="search-label" for="scenario-search">SEARCH SCENARIOS</label>
+          <div class="search-input"><span>⌕</span><input id="scenario-search" placeholder="ID, dataset, relationship…">
+          </div><label class="field-label" for="pet-filter">SOURCE PET <span>SECONDS</span></label>
+          <div class="range-input"><input type="range" id="pet-filter" min="0" max="5" step="0.1" value="5"><output
+              id="pet-value">Any</output></div><label class="field-label" for="dataset-filter">SOURCE
+            DATASET</label><select id="dataset-filter">
+            <option value="">All imported sources</option>
+          </select><label class="field-label" for="agents-filter">MINIMUM AGENTS</label><select id="agents-filter">
+            <option value="0">Any agent count</option>
+            <option value="2">2 or more</option>
+            <option value="3">3 or more</option>
+            <option value="4">4 or more</option>
+          </select><label class="check-row"><input type="checkbox" id="fixtures-filter"><span>Include synthetic
+              fixtures</span></label>
+          <div class="filter-note">Fixture records remain labeled and are never included in research aggregates.</div>
+        </section>
+        <section class="results-panel">
+          <div class="results-toolbar"><span id="result-count" class="mono">0 RESEARCH RECORDS</span><button
+              class="sort-button" id="sort-button">SORT · PET ↑</button></div>
+          <div id="results-list" class="empty-results">
+            <div class="empty-mark">⌕</div>
+            <h3>No research records imported</h3>
+            <p>After adding a validated dataset release, matching scenarios will appear here. You can explore the
+              deterministic test fixture below.</p><button class="fixture-result" data-view="replay"><span
+                class="fixture-tag"><span class="fixture-dot"></span> SYNTHETIC FIXTURE</span><b>Two-vehicle
+                perpendicular crossing</b><span class="mono">fixture-crossing-001 · local metric frame</span><span
+                class="fixture-open">Open replay →</span></button>
+          </div>
+        </section>
+      </div>
+    </template>
+
+<template id="replay-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> REPLAY LABORATORY</div>
+          <h1>Inspect the <em>geometry.</em></h1>
+          <p class="lede">Playback, occupancy intervals, and vehicle footprints for one deterministic fixture.</p>
+        </div><span class="fixture-tag"><span class="fixture-dot"></span> SYNTHETIC FIXTURE</span>
+      </div>
+      <div class="replay-panel">
+        <div id="replay-scene" class="scene-canvas replay-canvas" role="img"
+          aria-label="Animated synthetic vehicle trajectories"></div>
+        <div class="replay-inspector">
+          <div class="section-kicker">SCENARIO INSPECTOR</div>
+          <h3>Perpendicular crossing</h3>
+          <div class="mono replay-id">fixture-crossing-001</div>
+          <div class="inspector-row"><span>Source</span><b>Synthetic fixture</b></div>
+          <div class="inspector-row"><span>Agents</span><b>2 vehicles</b></div>
+          <div class="inspector-row"><span>Sample rate</span><b>1 Hz (fixture)</b></div>
+          <div class="inspector-row"><span>Source PET</span><b>Unavailable</b></div>
+          <div class="inspector-row"><span>Derived PET</span><b>Undefined*</b></div>
+          <div class="inspector-note">* Both center points occupy the circular conflict region at the same sampled time.
+            Simultaneous occupancy is not an ordinary sequential PET event.</div><a class="button-quiet"
+            href="#methodology" data-view="methodology">Measurement notes →</a>
+        </div>
+      </div>
+      <section class="measurement-panel">
+        <div class="section-kicker">OCCUPANCY SEQUENCE · CENTER-POINT ZONE</div>
+        <h3>Time through the conflict region</h3>
+        <div class="occupancy-chart">
+          <div class="occ-axis"><span>0 s</span><span>3 s</span><span>4.5 s</span><span>6 s</span><span>9 s</span></div>
+          <div class="occ-row"><label>VEHICLE A</label>
+            <div class="occ-track"><i class="occ-bar cyan-bar" style="left:46.7%;width:13.3%"></i><i class="occ-point"
+                style="left:60%"></i></div><span class="mono">4.2–5.4 s</span>
+          </div>
+          <div class="occ-row"><label>VEHICLE B</label>
+            <div class="occ-track"><i class="occ-bar purple-bar" style="left:46.7%;width:13.3%"></i><i class="occ-point"
+                style="left:60%"></i></div><span class="mono">4.2–5.4 s</span>
+          </div>
+        </div>
+        <p class="chart-note">Fixture-derived from a circular zone with 3 m radius and linear interpolation between the
+          supplied 1-second samples. Overlap is flagged; no sequential PET value is reported.</p>
+      </section>
+    </template>
+
+<template id="analytics-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> STATISTICAL ANALYSIS</div>
+          <h1>Read the <em>evidence.</em></h1>
+          <p class="lede">Every aggregate is tied to its filtered population and dataset release.</p>
+        </div>
+      </div>
+      <div class="catalog-banner"><span class="status-dot"></span>
+        <div><b>Research aggregates are unavailable.</b><span> There is no imported research release, so distributions
+            and cross-dataset comparisons cannot be computed.</span></div>
+      </div>
+      <div class="analysis-grid">
+        <article>
+          <div class="section-kicker">POST-ENCROACHMENT TIME</div>
+          <h3>PET distribution</h3>
+          <div class="blank-chart">
+            <div class="blank-axis"><span>0</span><span>1</span><span>2</span><span>3+</span><span>sec</span></div>
+            <div class="blank-center" id="analytics-pet-caption">No research measurements<br><small>Waiting for
+                validated dataset import</small></div>
+          </div>
+        </article>
+        <article>
+          <div class="section-kicker">INTERACTION RELATIONSHIPS</div>
+          <h3>Path combinations</h3>
+          <div class="blank-matrix" id="relationship-matrix">
+            <span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span>
+          </div>
+          <p class="chart-note">No counts are shown until imported observations are available.</p>
+        </article>
+      </div>
+      <div class="method-callout"><span>i</span>
+        <p>PET is a temporal separation measurement. It is not a collision probability or a universal crash-risk
+          category.</p><button data-view="methodology">Methodology →</button>
+      </div>
+    </template>
+
+<template id="atlas-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> SPATIAL CONFLICT ATLAS</div>
+          <h1>Where paths <em>converge.</em></h1>
+          <p class="lede">Geographic views require source coordinates. This local fixture only has metric scene
+            coordinates.</p>
+        </div>
+      </div>
+      <div class="atlas-frame">
+        <div class="atlas-grid">
+          <div class="atlas-cross"></div>
+          <div class="atlas-origin">LOCAL ORIGIN 0, 0 m</div>
+          <div class="atlas-lock">⌖</div>
+        </div>
+        <div class="atlas-caption"><span>NO GEOGRAPHIC DATA LOADED</span><span>MapLibre view unavailable until a
+            georeferenced release is imported.</span></div>
+      </div>
+      <div class="catalog-banner"><span class="fixture-dot"></span>
+        <div><b>Fixture geometry is local and synthetic.</b><span> Coordinates are not latitude/longitude and are not
+            displayed on a geographic basemap.</span></div>
+      </div>
+    </template>
+
+<template id="datasets-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> DATA CATALOG</div>
+          <h1>Know the <em>provenance.</em></h1>
+          <p class="lede">Research sources are tracked separately from code and derived-data permissions.</p>
+        </div>
+      </div>
+      <div class="dataset-card">
+        <div class="dataset-card-head"><span class="dataset-symbol">IH</span>
+          <div>
+            <h3>InterHub</h3><span class="mono">UPSTREAM RESEARCH SOURCE · NOT IMPORTED</span>
+          </div><span class="status-pill">NOT AVAILABLE LOCALLY</span>
+        </div>
+        <p>InterHub provides interaction metadata and unified trajectory caches across releases including nuPlan, Waymo,
+          INTERACTION, Lyft, and Argoverse 2. No InterHub release, metadata file, trajectories, or maps are present in
+          this repository.</p>
+        <div class="coverage-grid">
+          <div><span>IMPORTED SCENARIOS</span><b>—</b></div>
+          <div><span>TRAJECTORIES</span><b>—</b></div>
+          <div><span>MAP COVERAGE</span><b>—</b></div>
+          <div><span>MEASUREMENT COVERAGE</span><b>—</b></div>
+        </div>
+        <div class="license-grid">
+          <div><span>UPSTREAM CODE</span><b>MIT</b></div>
+          <div><span>DATA LICENSE</span><b>Verify per source dataset</b></div>
+          <div><span>MAP REDISTRIBUTION</span><b>Not established</b></div>
+          <div><span>DERIVED DATA</span><b>Review terms by source</b></div>
+        </div>
+        <div class="dataset-links"><a href="https://github.com/zxc-tju/InterHub" target="_blank"
+            rel="noreferrer">InterHub repository ↗</a><a href="https://doi.org/10.1038/s41597-025-05344-7"
+            target="_blank" rel="noreferrer">Research publication ↗</a><a
+            href="https://figshare.com/articles/dataset/_/27899754" target="_blank" rel="noreferrer">Dataset record
+            ↗</a></div>
+      </div>
+      <div id="dataset-index"></div>
+      <div class="fixture-card"><span class="fixture-dot"></span>
+        <div><b>Local deterministic fixture</b><span> Used to validate playback and geometry only. Explicitly synthetic;
+            not a dataset observation and excluded from all research counts.</span></div><a href="#replay"
+          data-view="replay">View fixture →</a>
+      </div>
+    </template>
+
+<template id="methodology-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> SCIENTIFIC METHOD</div>
+          <h1>Separate what is <em>measured.</em></h1>
+          <p class="lede">Source annotations, independent derivations, and assumptions remain distinct.</p>
+        </div>
+      </div>
+      <div class="method-list">
+        <article><span class="method-index">01</span>
+          <div>
+            <h3>Source-provided PET</h3>
+            <p>Stored exactly as supplied by the source release, with its original scenario and key-agent references.
+              This repository has no imported InterHub metadata, so no source PET values are currently available.</p>
+            <span class="method-tag">SOURCE ANNOTATION · NOT IMPORTED</span>
+          </div>
+        </article>
+        <article><span class="method-index">02</span>
+          <div>
+            <h3>Center-point occupancy PET</h3>
+            <p>For non-overlapping sequential occupancy of the same conflict region: second agent entry time minus first
+              agent exit time. This implementation uses linear interpolation for boundary crossings. Simultaneous
+              occupancy is undefined as ordinary sequential PET; it is kept separate.</p><span
+              class="method-tag">DERIVED · FIXTURE ONLY</span>
+          </div>
+        </article>
+        <article><span class="method-index">03</span>
+          <div>
+            <h3>Vehicle-footprint occupancy</h3>
+            <p>Requires verified vehicle dimensions and a documented conflict-zone geometry. The current fixture does
+              not produce this measurement; no dimensions or footprints are inferred for research vehicles.</p><span
+              class="method-tag">NOT AVAILABLE</span>
+          </div>
+        </article>
+        <article><span class="method-index">04</span>
+          <div>
+            <h3>Interaction intensity</h3>
+            <p>InterHub’s original intensity is based on a minimum-effort conflict-resolution formulation and reported
+              in acceleration units. This project does not reproduce it until the exact upstream implementation and
+              input conventions are checked against a pinned source revision.</p><span class="method-tag">SOURCE METRIC
+              · NOT REPRODUCED</span>
+          </div>
+        </article>
+      </div>
+      <div class="method-callout"><span>!</span>
+        <p>PET alone must not be interpreted as a probability of collision or a legally established risk category.</p>
+      </div>
+      <div class="source-citation">SOURCE REFERENCES <a href="https://github.com/zxc-tju/InterHub/blob/main/dataset.md"
+          target="_blank" rel="noreferrer">InterHub data dictionary ↗</a><a
+          href="https://github.com/zxc-tju/InterHub/blob/main/1_interaction_extract.py" target="_blank"
+          rel="noreferrer">Interaction extraction implementation ↗</a></div>
+    </template>
+
+<template id="relationships-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> INTERACTION RELATIONSHIPS</div>
+          <h1>Read the <em>movement.</em></h1>
+          <p class="lede">Pair-specific turning, path relation, and priority annotations from an imported release.</p>
+        </div>
+      </div>
+      <div class="catalog-banner"><span class="status-dot"></span>
+        <div><b>No annotated interaction pairs are indexed.</b><span> Relationship counts are withheld until research
+            metadata is imported and validated. The fixture has no source turning or priority annotations.</span></div>
+      </div>
+      <div class="analysis-grid">
+        <article>
+          <div class="section-kicker">PATH RELATION × TURNING PAIR</div>
+          <h3>Relationship matrix</h3>
+          <div class="blank-matrix" id="relationship-matrix">
+            <span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span>
+          </div>
+        </article>
+        <article>
+          <div class="section-kicker">SOURCE KEY PAIR</div>
+          <h3>Pair semantics</h3>
+          <p class="chart-note">Key-agent annotations belong to the original pair. They are not assigned to all agents
+            in a multi-vehicle scenario. Filters must match distinct agents within one annotated pair.</p>
+        </article>
+      </div>
+    </template>
+
+<template id="compare-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> SCENARIO COMPARISON</div>
+          <h1>Compare <em>observations.</em></h1>
+          <p class="lede">Linked motion and measurement views require two or more imported, replayable scenarios.</p>
+        </div>
+      </div>
+      <div class="catalog-banner"><span class="status-dot"></span>
+        <div><b>Comparison is waiting for research records.</b><span> No empirical scenarios are available to select.
+            The synthetic fixture is excluded from research comparisons.</span></div>
+      </div>
+      <div class="compare-empty">
+        <div>01 <span>SCENARIO A</span><b>Not selected</b></div><span class="compare-versus">↔</span>
+        <div>02 <span>SCENARIO B</span><b>Not selected</b></div>
+      </div>
+      <div class="method-callout"><span>i</span>
+        <p>Scenario playback is never time-warped for comparison. Distinct timestamps and sampling rates must remain
+          visible.</p>
+      </div>
+    </template>
+
+<template id="quality-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> DATA QUALITY</div>
+          <h1>Inspect the <em>record.</em></h1>
+          <p class="lede">Validation failures and quality flags stay attached to their source records.</p>
+        </div><button class="button-quiet export-button" id="export-quality">Export report <span>↗</span></button>
+      </div>
+      <div class="catalog-banner"><span class="status-dot"></span>
+        <div><b>There are no imported research records to validate.</b><span> The local synthetic fixture is not a
+            research quality sample.</span></div>
+      </div>
+      <div class="quality-grid" id="quality-grid">
+        <div><span>RESEARCH RECORDS CHECKED</span><b>—</b></div>
+        <div><span>VALIDATION ERRORS</span><b>—</b></div>
+        <div><span>QUALITY WARNINGS</span><b>—</b></div>
+        <div><span>MAP COVERAGE</span><b>—</b></div>
+      </div>
+      <section class="quality-policy">
+        <div class="section-kicker">VALIDATION POLICY</div>
+        <h3>Missing is not zero.</h3>
+        <p>Absent positions, maps, dimensions, or measurements remain null and are reported explicitly. Exclusions must
+          retain their rule and provenance. This build has no failed-record table because no source records have been
+          loaded.</p>
+      </section>
+    </template>
+
+<template id="api-docs-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> DEVELOPER REFERENCE</div>
+          <h1>Research API <em>v1.</em></h1>
+          <p class="lede">Read-only local endpoints for release status, datasets, and scenario records.</p>
+        </div><a class="button-quiet export-button" href="/v1/openapi.json" target="_blank" rel="noreferrer">Open
+          OpenAPI JSON ↗</a>
+      </div>
+      <div class="api-doc-list">
+        <div><span>GET</span><code>/v1/health</code>
+          <p>Service and current data-class status.</p>
+        </div>
+        <div><span>GET</span><code>/v1/releases</code>
+          <p>Local release identifier. Current release is a fixture only.</p>
+        </div>
+        <div><span>GET</span><code>/v1/overview</code>
+          <p>Explicit research-data availability and fixture counts.</p>
+        </div>
+        <div><span>GET</span><code>/v1/datasets</code>
+          <p>Imported research datasets; empty until an import is validated.</p>
+        </div>
+        <div><span>GET</span><code>/v1/scenarios</code>
+          <p>Research scenarios only. Pass <code>?includeFixtures=true</code> to explicitly opt into deterministic
+            synthetic validation fixtures.</p>
+        </div>
+        <div><span>GET</span><code>/v1/scenarios/{id}?includeFixtures=true</code>
+          <p>Retrieve a fixture by stable ID with explicit fixture opt-in.</p>
+        </div>
+      </div>
+      <pre class="code-sample">curl 'http://localhost:8080/v1/scenarios?includeFixtures=true'</pre>
+    </template>
+
+<template id="about-template">
+      <div class="page-title-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> ABOUT THIS PROJECT</div>
+          <h1>Traffic Conflict <em>Atlas.</em></h1>
+          <p class="lede">An open-source scientific research platform for understanding vehicle interaction events and
+            surrogate safety measures.</p>
+        </div>
+      </div>
+      <div class="about-copy">
+        <p>The goal is to make interaction records searchable, replayable, and reproducible while preserving the
+          distinctions between original annotations, independently derived metrics, and missing data.</p>
+        <h3>Current local build</h3>
+        <p>The workbench, API, and geometry validation fixture run locally without external services. No real-world
+          driving dataset is bundled. Research catalog, spatial map, and aggregate statistics remain empty until a
+          dataset release with suitable rights and provenance is imported.</p>
+        <h3>Open source</h3>
+        <p>Licensed under the MIT License. Source dataset licenses and redistribution terms remain separate and must be
+          verified for every imported dataset and map.</p><a href="https://github.com/zxc-tju/InterHub" target="_blank"
+          rel="noreferrer">Upstream InterHub project ↗</a>
+      </div>
+    </template>
