@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" width="880" height="540" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+  <defs>
+    <linearGradient id="window-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141a23"/>
+      <stop offset="100%" stop-color="#0c1017"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="880" height="540" fill="transparent"/>
+
+  <!-- Window container -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="16" width="840" height="500" rx="10" fill="url(#window-grad)" stroke="#222f3d" stroke-width="1"/>
+    
+    <!-- Title bar -->
+    <rect x="20" y="16" width="840" height="38" rx="10" fill="#18202c"/>
+    <rect x="20" y="44" width="840" height="10" fill="#18202c"/>
+    <line x1="20" y1="54" x2="860" y2="54" stroke="#222f3d" stroke-width="1"/>
+    
+    <!-- Window buttons -->
+    <circle cx="44" cy="35" r="6" fill="#ff5f56" stroke="#e0443e" stroke-width="0.5"/>
+    <circle cx="64" cy="35" r="6" fill="#ffbd2e" stroke="#dea123" stroke-width="0.5"/>
+    <circle cx="84" cy="35" r="6" fill="#27c93f" stroke="#1aab29" stroke-width="0.5"/>
+    
+    <!-- Title -->
+    <text x="440" y="39" text-anchor="middle" fill="#8899a6" font-size="12" font-weight="500">traffic-conflicts — zsh — 880x500</text>
+  </g>
+
+  <!-- Terminal Content -->
+  <g font-size="12" xml:space="preserve">
+    <!-- Command 1 -->
+    <text x="45" y="86" fill="#4fd1bb" font-weight="600">➜ </text>
+    <text x="65" y="86" fill="#58c8e7" font-weight="600">traffic-conflicts </text>
+    <text x="215" y="86" fill="#e4eaf0">python3 -m pipelines.traffic_conflicts.cli sources-list</text>
+
+    <text x="45" y="108" fill="#8391a0">[</text>
+    <text x="65" y="126" fill="#8391a0">{ <tspan fill="#c1a5f3">"id"</tspan>: <tspan fill="#efb65e">"nuplan_train"</tspan>, <tspan fill="#c1a5f3">"status"</tspan>: <tspan fill="#8391a0">"adapter-supported; not necessarily imported"</tspan> },</text>
+    <text x="65" y="144" fill="#8391a0">{ <tspan fill="#c1a5f3">"id"</tspan>: <tspan fill="#efb65e">"waymo_train"</tspan>, <tspan fill="#c1a5f3">"status"</tspan>: <tspan fill="#8391a0">"adapter-supported; not necessarily imported"</tspan> },</text>
+    <text x="65" y="162" fill="#8391a0">{ <tspan fill="#c1a5f3">"id"</tspan>: <tspan fill="#efb65e">"interaction_multi"</tspan>, <tspan fill="#c1a5f3">"status"</tspan>: <tspan fill="#8391a0">"adapter-supported; not necessarily imported"</tspan> },</text>
+    <text x="65" y="180" fill="#8391a0">{ <tspan fill="#c1a5f3">"id"</tspan>: <tspan fill="#efb65e">"av2_motion_forecasting"</tspan>, <tspan fill="#c1a5f3">"status"</tspan>: <tspan fill="#8391a0">"adapter-supported; not necessarily imported"</tspan> }</text>
+    <text x="45" y="198" fill="#8391a0">]</text>
+
+    <!-- Command 2 -->
+    <text x="45" y="232" fill="#4fd1bb" font-weight="600">➜ </text>
+    <text x="65" y="232" fill="#58c8e7" font-weight="600">traffic-conflicts </text>
+    <text x="215" y="232" fill="#e4eaf0">python3 -m pipelines.traffic_conflicts.indexing --output data/index.sqlite \</text>
+    <text x="215" y="250" fill="#e4eaf0">  --demo-fixture data/fixtures/synthetic-crossing.json</text>
+
+    <text x="45" y="274" fill="#4fd1bb">✔</text>
+    <text x="65" y="274" fill="#8391a0">Indexed fixture-crossing-001 [synthetic-fixture] into data/index.sqlite</text>
+
+    <!-- Command 3 -->
+    <text x="45" y="308" fill="#4fd1bb" font-weight="600">➜ </text>
+    <text x="65" y="308" fill="#58c8e7" font-weight="600">traffic-conflicts </text>
+    <text x="215" y="308" fill="#e4eaf0">curl -s http://127.0.0.1:8080/v1/health | jq .</text>
+
+    <text x="45" y="330" fill="#8391a0">{</text>
+    <text x="65" y="348" fill="#c1a5f3">  "service"<tspan fill="#8391a0">: </tspan><tspan fill="#efb65e">"traffic-conflict-atlas"</tspan><tspan fill="#8391a0">,</tspan></text>
+    <text x="65" y="366" fill="#c1a5f3">  "status"<tspan fill="#8391a0">: </tspan><tspan fill="#4fd1bb">"ok"</tspan><tspan fill="#8391a0">,</tspan></text>
+    <text x="65" y="384" fill="#c1a5f3">  "researchScenarios"<tspan fill="#8391a0">: </tspan><tspan fill="#58c8e7">0</tspan><tspan fill="#8391a0">,</tspan></text>
+    <text x="65" y="402" fill="#c1a5f3">  "syntheticFixtures"<tspan fill="#8391a0">: </tspan><tspan fill="#58c8e7">1</tspan></text>
+    <text x="45" y="420" fill="#8391a0">}</text>
+
+    <!-- Command 4 -->
+    <text x="45" y="454" fill="#4fd1bb" font-weight="600">➜ </text>
+    <text x="65" y="454" fill="#58c8e7" font-weight="600">traffic-conflicts </text>
+    <text x="215" y="454" fill="#e4eaf0">make test</text>
+    <text x="45" y="476" fill="#4fd1bb">ok</text>
+    <text x="75" y="476" fill="#8391a0">traffic-conflicts/services/api/cmd/atlas (0.936s)</text>
+    <text x="45" y="494" fill="#4fd1bb">Ran 18 tests in 0.077s · OK</text>
+  </g>
+</svg>

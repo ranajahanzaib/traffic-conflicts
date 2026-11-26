@@ -1,0 +1,7 @@
+# Architecture
+
+The application uses a React and TypeScript dashboard built with Vite, a read-only retrieval service in Go's standard library with SQLite through `modernc.org/sqlite`, and Python's standard library for metadata inspection, indexing, aggregates, and scientific metric helpers. A deterministic JSON fixture drives local replay, while the versioned SQLite schema can index reviewed research metadata imports. The example license manifest starts unreviewed and cannot authorize an import.
+
+Research ingestion is a local, explicit operation. The index preserves source release identifiers, original annotation payloads, per-source license rights, key-agent pair labels, and normalization quality findings. Trajectory and map availability remain false unless those assets have actually been processed and indexed. Fixture rows use a separate data class and are excluded from research queries and aggregates by default.
+
+The dashboard uses local metric coordinates only. It does not invent latitude/longitude or draw fabricated road maps. Research catalogs and analytics report missing data explicitly. Vite builds a static bundle into `apps/web/dist`; the Go API serves that bundle and `/v1` endpoints from one local process. During frontend development, Vite proxies `/v1` requests to the local Go service. Python builds indexes and aggregate artifacts offline; no runtime database writes are exposed through the API.
